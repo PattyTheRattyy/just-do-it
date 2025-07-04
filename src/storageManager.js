@@ -1,9 +1,18 @@
 import { project } from "./projects.js";
 import { todo } from "./todos.js";
 
-export const savingManager = (function () {
+export const storageManager = (function () {
   function hello() {
     console.log("hello, I am the saving manager!");
+  }
+
+  function loadProject(project) {
+    let proj = localStorage.getItem(project);
+    if (proj) {
+      return JSON.parse(proj);
+    } else {
+      console.log("Project not found in local storage");
+    }
   }
 
   function saveProject(project) {
@@ -11,8 +20,8 @@ export const savingManager = (function () {
     localStorage.clear();
     console.log("saving project...");
     let jsonProj = JSON.stringify(project);
-    localStorage.setItem(`${project.title}`, jsonProj);
+    localStorage.setItem(project.title, jsonProj);
   }
 
-  return { hello, saveProject };
+  return { hello, saveProject, loadProject };
 })();
