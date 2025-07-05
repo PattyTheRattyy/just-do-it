@@ -6,6 +6,7 @@ export const storageManager = (function () {
     console.log("hello, I am the saving manager!");
   }
 
+  // loads a specific project given the project title (Maybe this should be object like the save function for consistency)
   function loadProject(project) {
     let proj = localStorage.getItem(project);
     if (proj) {
@@ -15,6 +16,20 @@ export const storageManager = (function () {
     }
   }
 
+  function loadAllProjects() {
+    let projects = new Array();
+
+    for (let key in localStorage) {
+      if (!localStorage.hasOwnProperty(key)) {
+        continue;
+      }
+      let proj = loadProject(key);
+      projects.push(proj);
+    }
+    return projects;
+  }
+
+  // saves a specific project to local storage given the project object
   function saveProject(project) {
     // remove clear line later this is for development purposessss
     localStorage.clear();
@@ -23,5 +38,5 @@ export const storageManager = (function () {
     localStorage.setItem(project.title, jsonProj);
   }
 
-  return { hello, saveProject, loadProject };
+  return { hello, saveProject, loadProject, loadAllProjects };
 })();
