@@ -9,6 +9,7 @@ export const storageManager = (function () {
   // loads a specific project given the project title (Maybe this should be object like the save function for consistency)
   function loadProject(project) {
     let proj = localStorage.getItem(project);
+
     if (proj) {
       return JSON.parse(proj);
     } else {

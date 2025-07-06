@@ -2,6 +2,7 @@ export class project {
   constructor(title) {
     this.title = title;
     this.todos = new Array();
+    this.id = crypto.randomUUID();
   }
 
   get todoList() {

@@ -5,6 +5,7 @@ export class todo {
     this.dueDate = dueDate;
     this.priority = priority;
     this.complete = false;
+    this.id = crypto.randomUUID();
   }
   changeTitle(newPriority) {
     this.priority = newPriority;
