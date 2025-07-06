@@ -32,7 +32,6 @@ export const storageManager = (function () {
   // saves a specific project to local storage given the project object
   function saveProject(project) {
     // remove clear line later this is for development purposessss
-    localStorage.clear();
     console.log("saving project...");
     let jsonProj = JSON.stringify(project);
     localStorage.setItem(project.title, jsonProj);
