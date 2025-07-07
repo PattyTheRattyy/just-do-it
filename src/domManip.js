@@ -12,9 +12,25 @@ export function domManip() {
 
 let container = document.querySelector("#container");
 
+function displayProj(proj) {
+  let projectHeading = document.createElement("h1");
+  projectHeading.textContent = proj.title;
+  container.append(projectHeading);
+
+  for (let t in proj.todos) {
+    let todo = proj.todos[t];
+    displayTodo(todo);
+  }
+}
+
 function displayTodo(todo) {
   for (const [key, value] of Object.entries(todo)) {
     console.log(`${(key, value)}`);
+
+    // dont display id
+    if (key == "id") {
+      continue;
+    }
 
     let keyValDiv = document.createElement("div");
     keyValDiv.classList.add("keyValDiv");
@@ -24,16 +40,5 @@ function displayTodo(todo) {
     todoValue.textContent = value;
     keyValDiv.append(todoKey, todoValue);
     container.appendChild(keyValDiv);
-  }
-}
-
-function displayProj(proj) {
-  let projectHeading = document.createElement("h1");
-  projectHeading.textContent = proj.title;
-  container.append(projectHeading);
-
-  for (let t in proj.todos) {
-    let todo = proj.todos[t];
-    displayTodo(todo);
   }
 }

@@ -4,12 +4,10 @@ import { domManip } from "./domManip.js";
 import { project } from "./projects.js";
 import { todo } from "./todos.js";
 
-domManip();
-
-// let secondTodo4 = new todo("44", "ghu44rt", "phea44sible", "les44sgo");
-// secondProj3.addTodo(secondTodo3);
-
-let proj = storageManager.loadProject("default");
+let proj = storageManager.loadProject("second");
+let test2do = new todo("hey", "hey", "jru", "hey");
+proj.addTodo(test2do);
+storageManager.saveProject(proj);
 console.log(proj);
-// let secondTodo4 = new todo("44", "ghu44rt", "phea44sible", "les44sgo");
-// proj.addTodo(secondTodo4);
+
+domManip();

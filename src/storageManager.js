@@ -11,9 +11,11 @@ export const storageManager = (function () {
     let proj = localStorage.getItem(project);
 
     if (proj) {
-      return JSON.parse(proj);
+      let data = JSON.parse(proj);
+      let reconProj = reconstructProject(data);
+      return reconProj;
     } else {
-      console.log("Project not found in local storage");
+      console.log("Project data not found in local storage");
     }
   }
 
@@ -38,5 +40,33 @@ export const storageManager = (function () {
     localStorage.setItem(project.title, jsonProj);
   }
 
-  return { hello, saveProject, loadProject, loadAllProjects };
+  function reconstructProject(data) {
+    let proj = new project(data.title);
+    proj.todos = reconstructTodos(data.todos);
+
+    return proj;
+  }
+
+  function reconstructTodos(data) {
+    let todos = new Array();
+    for (let t in data) {
+      let todoData = data[t];
+      let reconTodo = new todo(
+        todoData.title,
+        todoData.description,
+        todoData.dueDate,
+        todoData.priority,
+        todoData.complete,
+        todoData.id
+      );
+      todos.push(reconTodo);
+    }
+    return todos;
+  }
+
+  function clearStorage() {
+    localStorage.clear();
+  }
+
+  return { hello, saveProject, loadProject, loadAllProjects, clearStorage };
 })();
