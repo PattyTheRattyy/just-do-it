@@ -7,14 +7,14 @@ export class todo {
     this.complete = false;
     this.id = crypto.randomUUID();
   }
-  changeTitle(newPriority) {
-    this.priority = newPriority;
+  changeTitle(newTitle) {
+    this.title = newTitle;
   }
-  changeDescription(newPriority) {
-    this.priority = newPriority;
+  changeDescription(newDescription) {
+    this.description = newDescription;
   }
-  changeDueDate(newPriority) {
-    this.priority = newPriority;
+  changeDueDate(newDueDate) {
+    this.dueDate = newDueDate;
   }
   changePriority(newPriority) {
     this.priority = newPriority;

@@ -34,7 +34,6 @@ export const storageManager = (function () {
 
   // saves a specific project to local storage given the project object
   function saveProject(project) {
-    // remove clear line later this is for development purposessss
     console.log("saving project...");
     let jsonProj = JSON.stringify(project);
     localStorage.setItem(project.title, jsonProj);
@@ -56,8 +55,7 @@ export const storageManager = (function () {
         todoData.description,
         todoData.dueDate,
         todoData.priority,
-        todoData.complete,
-        todoData.id
+        todoData.complete
       );
       todos.push(reconTodo);
     }
