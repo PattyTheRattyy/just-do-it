@@ -10,12 +10,12 @@ export function domManip() {
   }
 }
 
-let container = document.querySelector("#container");
+let main = document.querySelector("#main");
 
 function displayProj(proj) {
   let projectHeading = document.createElement("h1");
   projectHeading.textContent = proj.title;
-  container.append(projectHeading);
+  main.append(projectHeading);
 
   for (let t in proj.todos) {
     let todo = proj.todos[t];
@@ -39,6 +39,6 @@ function displayTodo(todo) {
     todoKey.textContent = key + ":";
     todoValue.textContent = value;
     keyValDiv.append(todoKey, todoValue);
-    container.appendChild(keyValDiv);
+    main.appendChild(keyValDiv);
   }
 }
