@@ -134,14 +134,14 @@ body {
 .bottom {
     display: grid;
     
-    grid-template-columns: repeat(3, 30px);
+    grid-template-columns: repeat(2, 30px);
     grid-template-rows: 1fr;
 
     justify-items: end;
     align-items: center;
 
     margin-right: 30px;
-    gap: 30px;
+    gap: 25px;
 
 }
 
