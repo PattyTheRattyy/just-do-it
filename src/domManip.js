@@ -1,4 +1,6 @@
 import { storageManager } from "./storageManager";
+import editImage from "../assets/images/note-edit-outline.png";
+import completeImage from "../assets/images/check-circle-outline.png";
 
 export function domManip() {
   let projects = storageManager.loadAllProjects();
@@ -10,12 +12,11 @@ export function domManip() {
   }
 }
 
-let main = document.querySelector("#main");
-
 function displayProj(proj) {
-  let projectHeading = document.createElement("h1");
-  projectHeading.textContent = proj.title;
-  main.append(projectHeading);
+  let mainGrid = document.querySelector("#main-grid");
+  let mainTitle = document.querySelector(".main-titles");
+
+  mainTitle.textContent = proj.title;
 
   for (let t in proj.todos) {
     let todo = proj.todos[t];
@@ -24,21 +25,35 @@ function displayProj(proj) {
 }
 
 function displayTodo(todo) {
-  for (const [key, value] of Object.entries(todo)) {
-    console.log(`${(key, value)}`);
+  let projGrid = document.querySelector(".projects-grid");
 
-    // dont display id
-    if (key == "id") {
-      continue;
-    }
+  let card = document.createElement("div");
+  card.classList.add("card");
 
-    let keyValDiv = document.createElement("div");
-    keyValDiv.classList.add("keyValDiv");
-    let todoKey = document.createElement("p");
-    let todoValue = document.createElement("p");
-    todoKey.textContent = key + ":";
-    todoValue.textContent = value;
-    keyValDiv.append(todoKey, todoValue);
-    main.appendChild(keyValDiv);
-  }
+  let top = document.createElement("div");
+  top.classList.add("top");
+
+  let title = document.createElement("p");
+  title.textContent = todo.title;
+  title.classList.add("card-title");
+
+  let description = document.createElement("p");
+  description.textContent = todo.description;
+  description.classList.add("card-info");
+
+  let bottom = document.createElement("div");
+  bottom.classList.add("bottom");
+
+  let editImg = document.createElement("img");
+  editImg.src = editImage;
+  editImg.classList.add("card-img");
+
+  let completeImg = document.createElement("img");
+  completeImg.src = completeImage;
+  completeImg.classList.add("card-img");
+
+  top.append(title, description);
+  bottom.append(editImg, completeImg);
+  card.append(top, bottom);
+  projGrid.appendChild(card);
 }

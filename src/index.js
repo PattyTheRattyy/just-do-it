@@ -14,4 +14,4 @@ import { todo } from "./todos.js";
 // storageManager.saveProject(proj);
 // console.log(proj);
 
-// domManip();
+domManip();

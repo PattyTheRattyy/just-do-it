@@ -108,7 +108,7 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: 3fr 1fr;
 
-    justify-items: end;
+    justify-items: start;
     align-items: end;
     row-gap: 60px;
     padding-bottom: 30px;
@@ -132,6 +132,7 @@ body {
 }
 
 .bottom {
+    justify-self: end;
     display: grid;
     
     grid-template-columns: repeat(2, 30px);
@@ -148,7 +149,6 @@ body {
 .card-img {
     height: 25px;
     width: 25px;
-
 }
 
 .card-title {
