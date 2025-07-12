@@ -13,14 +13,35 @@
 
 </head>
 <body>
-  <div id="header"></div>
+  <div id="header">
+    <button class="newProject">New Project</button>
+  </div>
   <div id="sidebar"></div>
   <div id="main">
+    <dialog>
+      <div class="flex">
+        <form method="dialog" class="addProjForm">
+          <div class="inputLabel">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Title"
+              autofocus
+              required
+            />
+          </div>
+          <button class="addProj" type="submit">Add</button>
+        </form>
+      </div>
+    </dialog>
 
     <div id="main-grid">
 
       <p class="main-titles">Default Project</p>
       <div class="projects-grid">
+
 
 
       </div>

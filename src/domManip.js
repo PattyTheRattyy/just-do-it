@@ -1,8 +1,13 @@
 import { storageManager } from "./storageManager";
+import { project } from "./projects";
 import editImage from "../assets/images/note-edit-outline.png";
 import completeImage from "../assets/images/check-circle-outline.png";
 
 export function domManip() {
+  loadSidebar();
+}
+
+function loadSidebar() {
   let projects = storageManager.loadAllProjects();
   console.log(projects);
 
@@ -68,3 +73,26 @@ function displayTodo(todo) {
   card.append(top, bottom);
   projGrid.appendChild(card);
 }
+
+const newProject = document.querySelector(".newProject");
+const dialog = document.querySelector("dialog");
+
+newProject.addEventListener("click", function () {
+  dialog.showModal();
+});
+
+const addProj = document.querySelector(".addProj");
+const addProjForm = document.querySelector(".addProjForm");
+
+addProjForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const title = addProjForm.title.value;
+  console.log(title);
+
+  let newProj = new project(title);
+  storageManager.saveProject(newProj);
+
+  dialog.close();
+  addProjForm.reset();
+});
