@@ -6,18 +6,29 @@ export function domManip() {
   let projects = storageManager.loadAllProjects();
   console.log(projects);
 
+  const sidebar = document.querySelector("#sidebar");
+
   for (let p in projects) {
     let proj = projects[p];
-    displayProj(proj);
+
+    let projPDiv = document.createElement("div");
+    let projP = document.createElement("p");
+    projP.textContent = proj.title;
+    projPDiv.appendChild(projP);
+    sidebar.appendChild(projPDiv);
+
+    projPDiv.addEventListener("click", () => {
+      displayProj(proj);
+    });
   }
 }
 
 function displayProj(proj) {
-  let mainGrid = document.querySelector("#main-grid");
   let mainTitle = document.querySelector(".main-titles");
-
   mainTitle.textContent = proj.title;
 
+  let projGrid = document.querySelector(".projects-grid");
+  projGrid.replaceChildren();
   for (let t in proj.todos) {
     let todo = proj.todos[t];
     displayTodo(todo);
