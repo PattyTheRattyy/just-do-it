@@ -4,7 +4,6 @@ import { todo } from "./todos";
 import editImage from "../assets/images/note-edit-outline.png";
 import completeImage from "../assets/images/check-circle-outline.png";
 import addImage from "../assets/images/plus-circle-outline.png";
-import { debug } from "webpack";
 
 export function domManip() {
   loadSidebar();
