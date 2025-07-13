@@ -57,8 +57,23 @@ body {
 
 /* Dialog */
 
-dialog {
+.projDialog {
     height: 300px;
+    width: 350px;
+
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+
+
+    margin: auto;
+
+    border: 2px solid black;
+
+
+}
+
+.todoDialog {
+    height: 500px;
     width: 350px;
 
     border-radius: 15px;
@@ -287,6 +302,27 @@ input[type="checkbox"] {
 .card-info {
     color: grey;
 }
+
+
+/* Add Card */
+
+.add-card {
+    background-color: white;
+    border-radius: 10px;
+
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+}
+.add-card > img {
+    height: 100px;
+    width: 100px;
+}
+
 
 
 

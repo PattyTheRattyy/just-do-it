@@ -1,7 +1,7 @@
 {
-  "name": "restaurant-webpage",
+  "name": "just-do-it",
   "version": "1.0.0",
-  "description": "practice with dom manipulation and using webpack!",
+  "description": "todo list app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,6 +30,7 @@
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
-    "date-fns": "^4.1.0"
+    "date-fns": "^4.1.0",
+    "util": "^0.12.5"
   }
 }

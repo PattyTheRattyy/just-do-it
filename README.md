@@ -1,2 +1,3 @@
-# restaurant-webpage
-practice with dom manipulation and using webpack!
+# just-do-it
+
+todo list app!

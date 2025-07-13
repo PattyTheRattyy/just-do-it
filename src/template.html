@@ -18,7 +18,7 @@
   </div>
   <div id="sidebar"></div>
   <div id="main">
-    <dialog>
+    <dialog class="projDialog">
       <div class="flex">
         <form method="dialog" class="addProjForm">
           <div class="inputLabel">
@@ -37,13 +37,65 @@
       </div>
     </dialog>
 
+
+
+    <dialog class="todoDialog">
+      <div class="flex">
+        <form method="dialog" class="addTodoForm">
+          <div class="inputLabel">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Title"
+              autofocus
+              required
+            />
+          </div>
+          <div class="inputLabel">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Description"
+              required
+            />
+          </div>
+          <div class="inputLabel">
+            <label for="dueDate">Due Date</label>
+            <input
+              type="text"
+              name="dueDate"
+              id="dueDate"
+              placeholder="dueDate"
+              required
+            />
+          </div>
+          <div class="inputLabel">
+            <label for="priority">Priority</label>
+            <input
+              type="text"
+              name="priority"
+              id="priority"
+              placeholder="priority"
+              required
+            />
+          </div>
+          <!-- <div class="inputLabel">
+            <label for="complete">Completed?</label>
+            <input type="checkbox" name="complete" id="complete" />
+          </div> -->
+          <button class="addProj" type="submit">Add</button>
+        </form>
+      </div>
+    </dialog>
+
     <div id="main-grid">
 
       <p class="main-titles">Default Project</p>
       <div class="projects-grid">
-
-
-
       </div>
 
     </div>
