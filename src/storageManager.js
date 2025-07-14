@@ -19,6 +19,15 @@ export const storageManager = (function () {
     }
   }
 
+  function isEmpty() {
+    return localStorage.length === 0;
+  }
+
+  function loadFirstProject() {
+    const firstProj = loadProject(localStorage.key(0));
+    return firstProj;
+  }
+
   function loadAllProjects() {
     let projects = new Array();
 
@@ -66,5 +75,13 @@ export const storageManager = (function () {
     localStorage.clear();
   }
 
-  return { hello, saveProject, loadProject, loadAllProjects, clearStorage };
+  return {
+    hello,
+    saveProject,
+    loadProject,
+    loadAllProjects,
+    clearStorage,
+    isEmpty,
+    loadFirstProject,
+  };
 })();

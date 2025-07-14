@@ -4,11 +4,25 @@ import { todo } from "./todos";
 import editImage from "../assets/images/note-edit-outline.png";
 import completeImage from "../assets/images/check-circle-outline.png";
 import addImage from "../assets/images/plus-circle-outline.png";
-import { constructFromSymbol } from "date-fns/constants";
+
+// IF there are no projects in local stoarge, then make a default project and have dom manip load the first project in storage
 
 export function domManip() {
+  if (storageManager.isEmpty()) {
+    defaultProject();
+  } else {
+    const firstProj = storageManager.loadFirstProject();
+    displayProj(firstProj);
+  }
+
   loadSidebar();
   projDialog();
+}
+
+function defaultProject() {
+  const defaultProj = new project("Default Project");
+  storageManager.saveProject(defaultProj);
+  displayProj(defaultProj);
 }
 
 function loadSidebar() {
