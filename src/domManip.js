@@ -4,9 +4,11 @@ import { todo } from "./todos";
 import editImage from "../assets/images/note-edit-outline.png";
 import completeImage from "../assets/images/check-circle-outline.png";
 import addImage from "../assets/images/plus-circle-outline.png";
+import { constructFromSymbol } from "date-fns/constants";
 
 export function domManip() {
   loadSidebar();
+  projDialog();
 }
 
 function loadSidebar() {
@@ -42,6 +44,7 @@ function displayProj(proj) {
     displayTodo(todo);
   }
   displayAddCard();
+  todoDialogFN();
 }
 
 function displayAddCard() {
@@ -92,36 +95,40 @@ function displayTodo(todo) {
   projGrid.appendChild(card);
 }
 
-const newProject = document.querySelector(".newProject");
-const projDialog = document.querySelector(".projDialog");
+function projDialog() {
+  const newProject = document.querySelector(".newProject");
+  const projDialog = document.querySelector(".projDialog");
 
-newProject.addEventListener("click", function () {
-  projDialog.showModal();
-});
+  newProject.addEventListener("click", function () {
+    projDialog.showModal();
+  });
 
-const addProjForm = document.querySelector(".addProjForm");
+  const addProjForm = document.querySelector(".addProjForm");
 
-addProjForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+  addProjForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  const title = addProjForm.title.value;
-  console.log(title);
+    const title = addProjForm.title.value;
+    console.log(title);
 
-  let newProj = new project(title);
-  storageManager.saveProject(newProj);
+    let newProj = new project(title);
+    storageManager.saveProject(newProj);
 
-  loadSidebar();
+    loadSidebar();
 
-  projDialog.close();
-  addProjForm.reset();
-});
+    projDialog.close();
+    addProjForm.reset();
+  });
+}
 
 const todoDialog = document.querySelector(".todoDialog");
 
-const addTodoImg = document.querySelector(".addTodo");
-addTodoImg.addEventListener("click", function () {
-  todoDialog.showModal();
-});
+function todoDialogFN() {
+  const addCard = document.querySelector(".add-card");
+  addCard.addEventListener("click", function () {
+    todoDialog.showModal();
+  });
+}
 
 const addTodoForm = document.querySelector(".addTodoForm");
 
@@ -129,16 +136,25 @@ addTodoForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const title = addTodoForm.title.value;
+  console.log(`Title: ${title}`);
   const description = addTodoForm.description.value;
+  console.log(`Desc: ${description}`);
   const dueDate = addTodoForm.dueDate.value;
+  console.log(`Date: ${dueDate}`);
   const priority = addTodoForm.priority.value;
+  console.log(`Prior: ${priority}`);
   // const complete = addTodoForm.complete.value;
 
-  let newTodo = new todo(title, description, dueDate, priority);
-  let projTitle = document.querySelector(".main-titles").textContent;
-  let proj = storageManager.loadProject(projTitle);
-  proj.addTodo(newTodo);
-  displayProj(proj);
+  if (title && description && dueDate && priority) {
+    const newTodo = new todo(title, description, dueDate, priority);
+    const projTitle = document.querySelector(".main-titles").textContent;
+    const proj = storageManager.loadProject(projTitle);
+    proj.addTodo(newTodo);
+    storageManager.saveProject(proj);
+    displayProj(proj);
+
+    loadSidebar();
+  }
 
   todoDialog.close();
   addTodoForm.reset();

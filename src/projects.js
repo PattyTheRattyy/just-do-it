@@ -5,10 +5,6 @@ export class project {
     this.id = crypto.randomUUID();
   }
 
-  get todoList() {
-    return this.todos;
-  }
-
   addTodo(todo) {
     this.todos.push(todo);
   }
