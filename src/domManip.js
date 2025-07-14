@@ -157,10 +157,13 @@ addTodoForm.addEventListener("submit", function (e) {
   console.log(`Date: ${dueDate}`);
   const priority = addTodoForm.priority.value;
   console.log(`Prior: ${priority}`);
-  // const complete = addTodoForm.complete.value;
+  const complete = addTodoForm.complete.value;
+  // if !complete {
+  //  complete = false
+  // }
 
   if (title && description && dueDate && priority) {
-    const newTodo = new todo(title, description, dueDate, priority);
+    const newTodo = new todo(title, description, dueDate, priority, complete);
     const projTitle = document.querySelector(".main-titles").textContent;
     const proj = storageManager.loadProject(projTitle);
     proj.addTodo(newTodo);

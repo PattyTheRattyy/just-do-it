@@ -73,7 +73,7 @@ body {
 }
 
 .todoDialog {
-    height: 500px;
+    height: 550px;
     width: 350px;
 
     border-radius: 15px;
@@ -81,6 +81,8 @@ body {
 
 
     margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
     border: 2px solid black;
 
@@ -121,7 +123,7 @@ label {
     letter-spacing: 1px;
 }
 
-input {
+input, select {
     width: 250px;
     padding: 5px;
     padding-left: 10px;
@@ -130,13 +132,13 @@ input {
     border: 1px solid black;
 }
 
-input:user-invalid {
+input:user-invalid, select:user-invalid {
     border: 1px solid #b91c1c;
 }
-input:user-valid {
+input:user-valid, select:user-valid {
     border: 1px solid #177c00;
 }
-input:focus {
+input:focus, select:focus {
     border: 1px solid #1d4ed8;
     outline: none;
     box-shadow: 1px 1px 4px  rgba(0,0,0,.3);
