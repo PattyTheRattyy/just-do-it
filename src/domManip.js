@@ -4,6 +4,7 @@ import { todo } from "./todos";
 import editImage from "../assets/images/note-edit-outline.png";
 import completeImage from "../assets/images/check-circle-outline.png";
 import addImage from "../assets/images/plus-circle-outline.png";
+import { formatDistanceToNow, isPast } from "date-fns";
 
 // IF there are no projects in local stoarge, then make a default project and have dom manip load the first project in storage
 
@@ -92,6 +93,24 @@ function displayTodo(todo) {
   description.textContent = todo.description;
   description.classList.add("card-info");
 
+  let dueDate = document.createElement("p");
+  let daysLeft;
+  if (isPast(todo.dueDate)) {
+    dueDate.textContent = `Overdue`;
+  } else {
+    let daysLeft = formatDistanceToNow(todo.dueDate);
+    dueDate.textContent = `Due in ${daysLeft}`;
+  }
+  dueDate.classList.add("card-info");
+
+  let priority = document.createElement("p");
+  priority.textContent = todo.priority;
+  priority.classList.add("card-info");
+
+  let complete = document.createElement("p");
+  complete.textContent = todo.complete;
+  complete.classList.add("card-info");
+
   let bottom = document.createElement("div");
   bottom.classList.add("bottom");
 
@@ -103,7 +122,7 @@ function displayTodo(todo) {
   completeImg.src = completeImage;
   completeImg.classList.add("card-img");
 
-  top.append(title, description);
+  top.append(title, description, dueDate, priority, complete);
   bottom.append(editImg, completeImg);
   card.append(top, bottom);
   projGrid.appendChild(card);
