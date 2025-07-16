@@ -75,6 +75,16 @@ export const storageManager = (function () {
     localStorage.clear();
   }
 
+  function deleteProject(project) {
+    if (localStorage.length <= 1) {
+      alert(
+        "Can't delete your only project, please create a new project first."
+      );
+    } else {
+      localStorage.removeItem(project);
+    }
+  }
+
   return {
     hello,
     saveProject,
@@ -83,5 +93,6 @@ export const storageManager = (function () {
     clearStorage,
     isEmpty,
     loadFirstProject,
+    deleteProject,
   };
 })();

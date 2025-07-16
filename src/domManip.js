@@ -9,15 +9,18 @@ import { formatDistanceToNow, isPast } from "date-fns";
 // IF there are no projects in local stoarge, then make a default project and have dom manip load the first project in storage
 
 export function domManip() {
+  reload();
+  loadSidebar();
+  projDialog();
+}
+
+function reload() {
   if (storageManager.isEmpty()) {
     defaultProject();
   } else {
     const firstProj = storageManager.loadFirstProject();
     displayProj(firstProj);
   }
-
-  loadSidebar();
-  projDialog();
 }
 
 function defaultProject() {
@@ -37,12 +40,25 @@ function loadSidebar() {
     let proj = projects[p];
 
     let projPDiv = document.createElement("div");
+    projPDiv.classList.add("projPDiv");
+
     let projP = document.createElement("p");
+    projP.classList.add("projP");
     projP.textContent = proj.title;
-    projPDiv.appendChild(projP);
+
+    let projDelBtn = document.createElement("button");
+    projDelBtn.textContent = "X";
+    projDelBtn.classList.add("projDelBtn");
+    projDelBtn.addEventListener("click", function () {
+      storageManager.deleteProject(proj.title);
+      reload();
+      loadSidebar();
+    });
+
+    projPDiv.append(projP, projDelBtn);
     sidebar.appendChild(projPDiv);
 
-    projPDiv.addEventListener("click", () => {
+    projP.addEventListener("click", () => {
       displayProj(proj);
     });
   }
