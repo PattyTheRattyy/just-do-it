@@ -2,7 +2,7 @@ import { storageManager } from "./storageManager";
 import { project } from "./projects";
 import { todo } from "./todos";
 import editImage from "../assets/images/note-edit-outline.png";
-import completeImage from "../assets/images/check-circle-outline.png";
+// import completeImage from "../assets/images/check-circle-outline.png";
 import addImage from "../assets/images/plus-circle-outline.png";
 import { formatDistanceToNow, isPast } from "date-fns";
 
@@ -110,7 +110,6 @@ function displayTodo(todo) {
   description.classList.add("card-info");
 
   let dueDate = document.createElement("p");
-  let daysLeft;
   if (isPast(todo.dueDate)) {
     dueDate.textContent = `Overdue`;
   } else {
@@ -133,13 +132,27 @@ function displayTodo(todo) {
   let editImg = document.createElement("img");
   editImg.src = editImage;
   editImg.classList.add("card-img");
+  editImg.addEventListener("click", function (e) {
+    e.stopPropagation();
+    console.log(`e.targ${e.target}`);
+    console.log(todo.id);
+    populateEditForm(todo);
+    // I think the id glitch is some shit about even tlisteners all firing off at once
+    editTodoDialog.showModal();
+  });
 
-  let completeImg = document.createElement("img");
-  completeImg.src = completeImage;
-  completeImg.classList.add("card-img");
+  // let completeImg = document.createElement("img");
+  // completeImg.src = completeImage;
+  // completeImg.classList.add("card-img");
+  // completeImg.addEventListener("click", function () {
+  //   // dont know if this is actually using the todo that was passed in?
+  //   todo.toggleComplete();
+  //   let projTitle = document.querySelector(".main-titles").textContent;
+  //   storageManager.saveProject(projTitle);
+  // });
 
   top.append(title, description, dueDate, priority, complete);
-  bottom.append(editImg, completeImg);
+  bottom.append(editImg);
   card.append(top, bottom);
   projGrid.appendChild(card);
 }
@@ -183,6 +196,7 @@ const addTodoForm = document.querySelector(".addTodoForm");
 
 addTodoForm.addEventListener("submit", function (e) {
   e.preventDefault();
+  console.log("testing");
 
   const title = addTodoForm.title.value;
   console.log(`Title: ${title}`);
@@ -210,4 +224,65 @@ addTodoForm.addEventListener("submit", function (e) {
 
   todoDialog.close();
   addTodoForm.reset();
+});
+
+const editTodoForm = document.querySelector(".editTodoForm");
+
+function populateEditForm(todo) {
+  editTodoForm.title.value = todo.title;
+  editTodoForm.description.value = todo.description;
+  editTodoForm.dueDate.value = todo.dueDate;
+  editTodoForm.priority.value = todo.priority;
+  editTodoForm.complete.value = todo.complete;
+  console.log(`id2: ${todo.id}`);
+  editTodoForm.todoID.value = todo.id;
+}
+
+const editTodoDialog = document.querySelector(".editTodoDialog");
+
+const saveTodoBtn = document.querySelector(".saveTodoBtn");
+
+saveTodoBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const title = editTodoForm.title.value;
+  console.log(`Title: ${title}`);
+  const description = editTodoForm.description.value;
+  console.log(`Desc: ${description}`);
+  const dueDate = editTodoForm.dueDate.value;
+  console.log(`Date: ${dueDate}`);
+  const priority = editTodoForm.priority.value;
+  console.log(`Prior: ${priority}`);
+  const complete = editTodoForm.complete.value;
+  // if !complete {
+  //  complete = false
+  // }
+
+  if (title && description && dueDate && priority) {
+    const projTitle = document.querySelector(".main-titles").textContent;
+    const proj = storageManager.loadProject(projTitle);
+
+    let todoID = editTodoForm.todoID.value;
+    for (let t in proj.todos) {
+      let todo = proj.todos[t];
+      console.log("I MADE IT HERE");
+      console.log(`todo.id: ${todo.id}`);
+      console.log(`todoID: ${todoID}`);
+      if (todo.id == todoID) {
+        console.log("I ALSO MADE IT HERE");
+        todo = proj.todos[t];
+        console.log(todo);
+        todo.editTodo(title, description, dueDate, priority, complete);
+        break;
+      }
+    }
+    // todo.editTodo(title, description, dueDate, priority, complete);
+    storageManager.saveProject(proj);
+
+    displayProj(proj);
+    loadSidebar();
+  }
+
+  editTodoDialog.close();
+  editTodoForm.reset();
 });

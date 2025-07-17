@@ -1,11 +1,12 @@
 export class todo {
-  constructor(title, description, dueDate, priority, complete) {
+  constructor(title, description, dueDate, priority, complete = "false") {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.complete = complete;
-    this.id = crypto.randomUUID();
+    this.id = title;
+    // this.id = crypto.randomUUID();
   }
   changeTitle(newTitle) {
     this.title = newTitle;
@@ -20,10 +21,18 @@ export class todo {
     this.priority = newPriority;
   }
   toggleComplete() {
-    if (this.complete == false) {
-      this.complete = true;
+    if (this.complete == "false") {
+      this.complete = "true";
     } else {
-      this.complete = false;
+      this.complete = "false";
     }
+  }
+
+  editTodo(title, description, dueDate, priority, complete) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.complete = complete;
   }
 }
