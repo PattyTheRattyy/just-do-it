@@ -136,7 +136,6 @@ function displayTodo(todo) {
     e.stopPropagation();
     console.log(`e.targ${e.target}`);
     console.log(todo.id);
-    console.log(todo.id);
     populateEditForm(todo);
     editTodoDialog.showModal();
   });
@@ -234,9 +233,7 @@ function populateEditForm(todo) {
   editTodoForm.dueDate.value = todo.dueDate;
   editTodoForm.priority.value = todo.priority;
   editTodoForm.complete.value = todo.complete;
-  console.log(`id2: ${todo.id}`);
   editTodoForm.todoID.value = todo.id;
-  console.log(todo.id);
 }
 
 const editTodoDialog = document.querySelector(".editTodoDialog");
@@ -264,8 +261,8 @@ saveTodoBtn.addEventListener("click", function (e) {
 
   if (title && description && dueDate && priority) {
     const projTitle = document.querySelector(".main-titles").textContent;
-    const proj = storageManager.loadProjectEditForm(projTitle);
-    // const proj = storageManager.loadProject(projTitle);
+    // const proj = storageManager.loadProjectEditForm(projTitle);
+    const proj = storageManager.loadProject(projTitle);
     // load project calls reconstruct project which creates a new project which is why the IDs of all the todos change by the time I get here...
     // BUG FOUND!!! YAY
 

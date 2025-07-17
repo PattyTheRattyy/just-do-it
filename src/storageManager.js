@@ -13,10 +13,10 @@ export const storageManager = (function () {
 
     if (proj) {
       let data = JSON.parse(proj);
-      console.log(data);
-      console.log(data.todos);
-      console.log(data.id);
-      console.log(data.title);
+      // console.log(data);
+      // console.log(data.todos);
+      // console.log(data.id);
+      // console.log(data.title);
       // follow up tomorrow with this project ID stuff, id should be created once only
       let reconProj = reconstructProject(data);
       return reconProj;
@@ -25,16 +25,16 @@ export const storageManager = (function () {
     }
   }
 
-  function loadProjectEditForm(project) {
-    let proj = localStorage.getItem(project);
+  // function loadProjectEditForm(project) {
+  //   let proj = localStorage.getItem(project);
 
-    if (proj) {
-      let data = JSON.parse(proj);
-      return data;
-    } else {
-      console.log("Project data not found in local storage");
-    }
-  }
+  //   if (proj) {
+  //     let data = JSON.parse(proj);
+  //     return data;
+  //   } else {
+  //     console.log("Project data not found in local storage");
+  //   }
+  // }
 
   function isEmpty() {
     return localStorage.length === 0;
@@ -66,9 +66,9 @@ export const storageManager = (function () {
   }
 
   function reconstructProject(data) {
-    console.log(data);
-    console.log(data.title);
-    console.log(data.id);
+    // console.log(data);
+    // console.log(data.title);
+    // console.log(data.id);
     let proj = new project(data.title, data.id);
     proj.todos = reconstructTodos(data.todos);
 
@@ -84,7 +84,8 @@ export const storageManager = (function () {
         todoData.description,
         todoData.dueDate,
         todoData.priority,
-        todoData.complete
+        todoData.complete,
+        todoData.id
       );
       todos.push(reconTodo);
     }
@@ -114,6 +115,5 @@ export const storageManager = (function () {
     isEmpty,
     loadFirstProject,
     deleteProject,
-    loadProjectEditForm,
   };
 })();
