@@ -136,8 +136,8 @@ function displayTodo(todo) {
     e.stopPropagation();
     console.log(`e.targ${e.target}`);
     console.log(todo.id);
+    console.log(todo.id);
     populateEditForm(todo);
-    // I think the id glitch is some shit about even tlisteners all firing off at once
     editTodoDialog.showModal();
   });
 
@@ -236,6 +236,7 @@ function populateEditForm(todo) {
   editTodoForm.complete.value = todo.complete;
   console.log(`id2: ${todo.id}`);
   editTodoForm.todoID.value = todo.id;
+  console.log(todo.id);
 }
 
 const editTodoDialog = document.querySelector(".editTodoDialog");
@@ -254,23 +255,28 @@ saveTodoBtn.addEventListener("click", function (e) {
   const priority = editTodoForm.priority.value;
   console.log(`Prior: ${priority}`);
   const complete = editTodoForm.complete.value;
+  console.log(`Complete: ${complete}`);
+  const todoID = editTodoForm.todoID.value;
+  console.log(`todoID: ${todoID}`);
   // if !complete {
   //  complete = false
   // }
 
   if (title && description && dueDate && priority) {
     const projTitle = document.querySelector(".main-titles").textContent;
-    const proj = storageManager.loadProject(projTitle);
+    const proj = storageManager.loadProjectEditForm(projTitle);
+    // const proj = storageManager.loadProject(projTitle);
+    // load project calls reconstruct project which creates a new project which is why the IDs of all the todos change by the time I get here...
+    // BUG FOUND!!! YAY
 
-    let todoID = editTodoForm.todoID.value;
     for (let t in proj.todos) {
       let todo = proj.todos[t];
+      console.log(todo);
       console.log("I MADE IT HERE");
       console.log(`todo.id: ${todo.id}`);
       console.log(`todoID: ${todoID}`);
       if (todo.id == todoID) {
         console.log("I ALSO MADE IT HERE");
-        todo = proj.todos[t];
         console.log(todo);
         todo.editTodo(title, description, dueDate, priority, complete);
         break;

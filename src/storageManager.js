@@ -9,11 +9,28 @@ export const storageManager = (function () {
   // loads a specific project given the project title (Maybe this should be object like the save function for consistency)
   function loadProject(project) {
     let proj = localStorage.getItem(project);
+    console.log(proj);
 
     if (proj) {
       let data = JSON.parse(proj);
+      console.log(data);
+      console.log(data.todos);
+      console.log(data.id);
+      console.log(data.title);
+      // follow up tomorrow with this project ID stuff, id should be created once only
       let reconProj = reconstructProject(data);
       return reconProj;
+    } else {
+      console.log("Project data not found in local storage");
+    }
+  }
+
+  function loadProjectEditForm(project) {
+    let proj = localStorage.getItem(project);
+
+    if (proj) {
+      let data = JSON.parse(proj);
+      return data;
     } else {
       console.log("Project data not found in local storage");
     }
@@ -49,7 +66,10 @@ export const storageManager = (function () {
   }
 
   function reconstructProject(data) {
-    let proj = new project(data.title);
+    console.log(data);
+    console.log(data.title);
+    console.log(data.id);
+    let proj = new project(data.title, data.id);
     proj.todos = reconstructTodos(data.todos);
 
     return proj;
@@ -94,5 +114,6 @@ export const storageManager = (function () {
     isEmpty,
     loadFirstProject,
     deleteProject,
+    loadProjectEditForm,
   };
 })();

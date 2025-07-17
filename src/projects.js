@@ -1,8 +1,8 @@
 export class project {
-  constructor(title) {
+  constructor(title, id = crypto.randomUUID()) {
     this.title = title;
     this.todos = new Array();
-    this.id = crypto.randomUUID();
+    this.id = id;
   }
 
   addTodo(todo) {

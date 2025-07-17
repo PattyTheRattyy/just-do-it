@@ -5,8 +5,8 @@ export class todo {
     this.dueDate = dueDate;
     this.priority = priority;
     this.complete = complete;
-    this.id = title;
-    // this.id = crypto.randomUUID();
+    // this.id = title;
+    this.id = crypto.randomUUID();
   }
   changeTitle(newTitle) {
     this.title = newTitle;
