@@ -366,10 +366,7 @@ input[type="checkbox"] {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 3fr 1fr;
 
-    /* justify-items: start;
-    align-items: end; */
-    /* row-gap: 60px; */
-    padding-bottom: 10px;
+
 
 }
 .low {
@@ -386,10 +383,11 @@ input[type="checkbox"] {
     display: grid;
 
     grid-template-columns: 1fr;
-    grid-template-rows: 20px 50px;
+    grid-template-rows: 32px 60px;
 
-    align-items: center;
     justify-items: start;
+    align-items: start;
+
 
 
     margin-left: 30px;
@@ -410,6 +408,7 @@ input[type="checkbox"] {
 
     margin-right: 30px;
     gap: 25px;
+    margin-bottom: 10px;
 
 
 }
@@ -417,8 +416,8 @@ input[type="checkbox"] {
     justify-self: start;
     margin-left: 10px;
 
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 10px;
     background-color: #177c00;
 }
@@ -427,10 +426,9 @@ input[type="checkbox"] {
     justify-self: start;
     margin-left: 10px;
 
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 10px;
-    background-color: #177c00;
     background-color: rgb(255, 0, 0, 0.7);
 }
 
@@ -439,7 +437,9 @@ input[type="checkbox"] {
     flex-direction: row;
     justify-content: end;
     align-items: center;
-    margin-right: 10px;
+
+
+    margin-bottom: 20px;
 
     /* width: 100%; */
 }
@@ -452,7 +452,8 @@ input[type="checkbox"] {
     font-size: 1rem;
     padding: 10px;
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-right: 15px;
     
 
     display: flex;
