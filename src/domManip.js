@@ -98,6 +98,26 @@ function displayTodo(todo) {
   let card = document.createElement("div");
   card.classList.add("card");
 
+  if (todo.priority == "low") {
+    card.classList.add("low");
+  } else if (todo.priority == "medium") {
+    card.classList.add("med");
+  } else if (todo.priority == "high") {
+    card.classList.add("high");
+  }
+
+  let topDate = document.createElement("div");
+  topDate.classList.add("topDate");
+  let dueDate = document.createElement("div");
+  if (isPast(todo.dueDate)) {
+    dueDate.textContent = `Overdue`;
+  } else {
+    let daysLeft = formatDistanceToNow(todo.dueDate);
+    dueDate.textContent = `Due in ${daysLeft}`;
+  }
+  dueDate.classList.add("dueDate");
+  topDate.appendChild(dueDate);
+
   let top = document.createElement("div");
   top.classList.add("top");
 
@@ -108,19 +128,6 @@ function displayTodo(todo) {
   let description = document.createElement("p");
   description.textContent = todo.description;
   description.classList.add("card-info");
-
-  let dueDate = document.createElement("p");
-  if (isPast(todo.dueDate)) {
-    dueDate.textContent = `Overdue`;
-  } else {
-    let daysLeft = formatDistanceToNow(todo.dueDate);
-    dueDate.textContent = `Due in ${daysLeft}`;
-  }
-  dueDate.classList.add("card-info");
-
-  let priority = document.createElement("p");
-  priority.textContent = todo.priority;
-  priority.classList.add("card-info");
 
   let complete = document.createElement("p");
   complete.textContent = todo.complete;
@@ -150,9 +157,9 @@ function displayTodo(todo) {
   //   storageManager.saveProject(projTitle);
   // });
 
-  top.append(title, description, dueDate, priority, complete);
-  bottom.append(editImg);
-  card.append(top, bottom);
+  top.append(title, description);
+  bottom.append(complete, editImg);
+  card.append(topDate, top, bottom);
   projGrid.appendChild(card);
 }
 
