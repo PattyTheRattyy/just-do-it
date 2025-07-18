@@ -109,11 +109,9 @@ function displayTodo(todo) {
   let topDate = document.createElement("div");
   topDate.classList.add("topDate");
   let dueDate = document.createElement("div");
+  dueDate.textContent = todo.dueDate;
   if (isPast(todo.dueDate)) {
-    dueDate.textContent = `Overdue`;
-  } else {
-    let daysLeft = formatDistanceToNow(todo.dueDate);
-    dueDate.textContent = `Due in ${daysLeft}`;
+    dueDate.classList.add("overdue");
   }
   dueDate.classList.add("dueDate");
   topDate.appendChild(dueDate);
@@ -130,8 +128,12 @@ function displayTodo(todo) {
   description.classList.add("card-info");
 
   let complete = document.createElement("p");
-  complete.textContent = todo.complete;
-  complete.classList.add("card-info");
+  // complete.textContent = todo.complete;
+  if (todo.complete == true) {
+    complete.classList.add("complete");
+  } else {
+    complete.classList.add("notComplete");
+  }
 
   let bottom = document.createElement("div");
   bottom.classList.add("bottom");
