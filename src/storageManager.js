@@ -49,7 +49,7 @@ export const storageManager = (function () {
     let projects = new Array();
 
     for (let key in localStorage) {
-      if (!localStorage.hasOwnProperty(key)) {
+      if (!localStorage.hasOwnProperty(key) || key == "debug") {
         continue;
       }
       let proj = loadProject(key);
