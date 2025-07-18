@@ -89,8 +89,8 @@ body {
 
 }
 
-editTodoDialog {
-    height: 550px;
+.editTodoDialog {
+    height: 600px;
     width: 350px;
 
     border-radius: 15px;
@@ -104,6 +104,50 @@ editTodoDialog {
     border: 2px solid black;
 
 }
+
+
+.cancel, .saveTodoBtn, .delTodoBtn {
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 80px;
+    font-weight: 700;
+}
+.cancel {
+    border: 2px solid grey;
+}
+.saveTodoBtn {
+    border: 2px solid green;
+}
+.delTodoBtn {
+    border: 2px solid red;
+}
+.cancel:hover, .saveTodoBtn:hover, .delTodoBtn:hover {
+    color: white;
+    background-color: green;
+}
+.cancel:hover {
+    color: white;
+    background-color: grey;
+}
+.delTodoBtn:hover {
+    color: white;
+    background-color: red;
+}
+.cancel:active, .saveTodoBtn:active, .delTodoBtn:active {
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.formBtns {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+
 
 
 dialog::backdrop {

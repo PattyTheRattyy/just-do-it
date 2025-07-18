@@ -90,7 +90,7 @@
           </div>
           <div class="inputLabel">
             <label for="complete">Completed?</label>
-            <input type="checkbox" name="complete" id="complete" value="true"/>
+            <input type="checkbox" name="complete" id="complete"/>
           </div>
           <button class="addProj" type="submit">Add</button>
         </form>
@@ -146,12 +146,14 @@
           </div>
           <div class="inputLabel">
             <label for="complete">Completed?</label>
-            <input type="checkbox" name="complete" id="complete" value="true"/>
+            <input type="checkbox" name="complete" id="complete" />
           </div>
           <input type="hidden" id="todoID" name="todoID" value="" />
-          <button class="cancel" type="button">Cancel</button>
-          <button class="saveTodoBtn" type="button">Save</button>
-          <button class="delTodoBtn" type="button">Delete</button>
+          <div class="formBtns">
+            <button class="cancel" type="button">Cancel</button>
+            <button class="saveTodoBtn" type="button">Save</button>
+            <button class="delTodoBtn" type="button">Delete</button>
+          </div>
         </form>
       </div>
     </dialog>

@@ -4,7 +4,7 @@ export class todo {
     description,
     dueDate,
     priority,
-    complete = "false",
+    complete,
     id = crypto.randomUUID()
   ) {
     this.title = title;
@@ -14,6 +14,7 @@ export class todo {
     this.complete = complete;
     this.id = id;
   }
+
   changeTitle(newTitle) {
     this.title = newTitle;
   }

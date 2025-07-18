@@ -205,10 +205,7 @@ addTodoForm.addEventListener("submit", function (e) {
   console.log(`Date: ${dueDate}`);
   const priority = addTodoForm.priority.value;
   console.log(`Prior: ${priority}`);
-  const complete = addTodoForm.complete.value;
-  // if !complete {
-  //  complete = false
-  // }
+  const complete = addTodoForm.complete.checked;
 
   if (title && description && dueDate && priority) {
     const newTodo = new todo(title, description, dueDate, priority, complete);
@@ -232,7 +229,7 @@ function populateEditForm(todo) {
   editTodoForm.description.value = todo.description;
   editTodoForm.dueDate.value = todo.dueDate;
   editTodoForm.priority.value = todo.priority;
-  editTodoForm.complete.value = todo.complete;
+  editTodoForm.complete.checked = todo.complete;
   editTodoForm.todoID.value = todo.id;
 }
 
@@ -251,13 +248,10 @@ saveTodoBtn.addEventListener("click", function (e) {
   console.log(`Date: ${dueDate}`);
   const priority = editTodoForm.priority.value;
   console.log(`Prior: ${priority}`);
-  const complete = editTodoForm.complete.value;
-  console.log(`Complete: ${complete}`);
   const todoID = editTodoForm.todoID.value;
   console.log(`todoID: ${todoID}`);
-  // if !complete {
-  //  complete = false
-  // }
+  const complete = editTodoForm.complete.checked;
+  console.log(`Complete: ${complete}`);
 
   if (title && description && dueDate && priority) {
     const projTitle = document.querySelector(".main-titles").textContent;
@@ -265,6 +259,7 @@ saveTodoBtn.addEventListener("click", function (e) {
     const proj = storageManager.loadProject(projTitle);
     // load project calls reconstruct project which creates a new project which is why the IDs of all the todos change by the time I get here...
     // BUG FOUND!!! YAY
+    // made it so that IDs are not changed when projects and todos are reconstructed, they just pass it in as an argument and if no id is passed in then its created
 
     for (let t in proj.todos) {
       let todo = proj.todos[t];
@@ -279,12 +274,47 @@ saveTodoBtn.addEventListener("click", function (e) {
         break;
       }
     }
-    // todo.editTodo(title, description, dueDate, priority, complete);
     storageManager.saveProject(proj);
 
     displayProj(proj);
     loadSidebar();
   }
+
+  editTodoDialog.close();
+  editTodoForm.reset();
+});
+
+// edit todo cancel btn
+const cancel = document.querySelector(".cancel");
+cancel.addEventListener("click", function () {
+  editTodoDialog.close();
+  editTodoForm.reset();
+});
+
+// edit todo delete btn
+const delTodoBtn = document.querySelector(".delTodoBtn");
+
+delTodoBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const todoID = editTodoForm.todoID.value;
+  console.log(`todoID: ${todoID}`);
+
+  const projTitle = document.querySelector(".main-titles").textContent;
+  const proj = storageManager.loadProject(projTitle);
+
+  for (let t in proj.todos) {
+    let todo = proj.todos[t];
+    if (todo.id == todoID) {
+      console.log("I MADE IT HERE!!");
+      proj.removeTodo(todo);
+      break;
+    }
+  }
+  storageManager.saveProject(proj);
+
+  displayProj(proj);
+  loadSidebar();
 
   editTodoDialog.close();
   editTodoForm.reset();
